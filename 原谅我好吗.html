@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对不起...</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff; /* 纯白背景 */
+            font-family: "Microsoft YaHei", sans-serif;
+            overflow: hidden;
+        }
+
+        #container {
+            text-align: center;
+        }
+
+        #main-img {
+            width: 250px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        #text-content {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 10px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: all 0.2s;
+        }
+
+        #accept-btn {
+            background-color: #ffb6c1; /* 温柔的粉色 */
+            color: white;
+        }
+
+        #reject-btn {
+            background-color: #d3d3d3; /* 灰色 */
+            color: white;
+            position: relative; /* 方便后续移动 */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <img id="main-img" src="https://xiaolongya.cn/uploads/1e2b40ae-31d7-48fe-bbc4-8c09a47f5fc5.jpg" alt="表情包">
+        <div id="text-content">你能原谅我吗？</div>
+        
+        <div class="btn-group" id="btn-group">
+            <button id="accept-btn">原谅</button>
+            <button id="reject-btn">不原谅</button>
+        </div>
+    </div>
+
+    <script>
+        const acceptBtn = document.getElementById('accept-btn');
+        const rejectBtn = document.getElementById('reject-btn');
+        const mainImg = document.getElementById('main-img');
+        const textContent = document.getElementById('text-content');
+        const btnGroup = document.getElementById('btn-group');
+
+        // 点击原谅
+        acceptBtn.addEventListener('click', () => {
+            textContent.innerText = "我就知道宝宝最好啦";
+            mainImg.src = "https://xiaolongya.cn/uploads/ff3be02d-894c-49b8-b897-1bfbed5fde8e.jpg";
+            // 隐藏按钮组
+            btnGroup.style.display = 'none';
+        });
+
+        // 点击不原谅（或者鼠标移入时触发，增加互动难度）
+        rejectBtn.addEventListener('click', () => {
+            // 改变文字和图片
+            textContent.innerText = "你真的不原谅我吗？";
+            mainImg.src = "https://xiaolongya.cn/uploads/cf1620f2-e675-40e8-9887-efa6e23c6c8b.jpg";
+            
+            // 随机改变按钮位置
+            moveButton();
+        });
+
+        function moveButton() {
+            // 获取浏览器窗口大小
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            
+            // 计算随机位置（保持在屏幕内，避开边缘）
+            const randomX = Math.random() * (windowWidth - rejectBtn.offsetWidth);
+            const randomY = Math.random() * (windowHeight - rejectBtn.offsetHeight);
+            
+            // 设为绝对定位
+            rejectBtn.style.position = 'fixed';
+            rejectBtn.style.left = randomX + 'px';
+            rejectBtn.style.top = randomY + 'px';
+        }
+    </script>
+</body>
+</html>
